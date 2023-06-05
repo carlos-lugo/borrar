@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+週報システム
+{% endblock %}
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<a href="/wr"> TOPに戻る</a>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <table class="table">
+    {{ form.as_table }}
+  </table>
+  <input class="btn btn-primary" type="submit" value="検索する">
+</form>
+
+{% if reports %}
+<table class="table">
+  <thead>
+  <tr>
+    <th>チーム</th>
+    <th>報告者</th>
+    <th>報告週</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for report in reports %}
+  <tr>
+    <td width="30%">
+      <span>
+        {{ report.team.name }}
+      </span>
+    </td>
+    <td width="50%">
+      <span>
+        {{ report.user.name }}
+      </span>
+    </td>
+    <td>
+      <span>
+        <a href="/wr/search/{{ report.min_weekly_report_id}}/"> {{ report.report_date|date:"Y/m/d" }}</a>
+      </span>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+週報はありません。
+{% endif %}
+{% endblock %}

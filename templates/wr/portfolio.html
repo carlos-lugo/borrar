@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+週報システム
+{% endblock %}
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<a href="/wr"> TOPに戻る</a>
+{% if members %}
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>報告者</th>
+  </tr>
+  <tbody>
+  {% for member in members %}
+  <tr>
+    <td width="50%">
+      <span>
+        <a href="/wr/portfolio/{{ member.user__id}}/"> {{ member.user__name }}</a>
+      </span>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+週報提出者はありません。
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+週報システム
+{% endblock %}
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<a href="/wr"> TOPに戻る</a>
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="row">
+    {% for form in formset %}
+    <div class="col-sm-4">
+      {% for type in types %}
+      {% if forloop.counter == forloop.parentloop.counter %}
+      {{ type.name }}:
+      {% endif %}
+      {% endfor %}
+      {{ form.as_p }}
+    </div>
+    {% endfor %}
+  </div>
+  {{ formset.management_form }}
+  <button type="submit" class="btn btn-primary">送信</button>
+</form>
+{% endblock %}

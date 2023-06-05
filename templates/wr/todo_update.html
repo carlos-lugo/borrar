@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+TODOリスト変更
+{% endblock %}
+
+{% block content %}
+<h1>TODO修正</h1>
+
+<form action="/todo/edit/{{ form.instance.pk }}/" method="post">
+  {% csrf_token %}
+  <table class="table">
+    {{ form.as_table }}
+  </table>
+  <a class="btn btn-secondary" href="/todo/">戻る</a>
+  <input class="btn btn-primary" type="submit" value="変更">
+</form>
+{% endblock %}

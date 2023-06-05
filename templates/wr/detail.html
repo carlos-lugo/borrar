@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'wr/css/detail.css' %}">
+{% endblock %}
+
+{% block title %}
+週報システム
+{% endblock %}
+
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<a href="/wr/{{ back }}"> 一覧に戻る</a>
+
+<div class="body">
+  <div class="w100 head">
+    {{ target.name }}
+  </div>
+  {% for index in indexes %}
+  <div class="w100 disp_center">
+    {{ index.report_date }}
+  </div>
+  {% for report in index.reports %}
+  <div {% if report.type %} class="w100 disp_right" {% else %} class="w100 disp_left" {% endif %}>
+    {% if report.type %}
+    <div class="disp_right bold">
+      {{ report.type.name }}
+    </div>
+    {% else %}
+    <div class="disp_left bold">
+      {{ report.created_user.name }}
+    </div>
+    {% endif %}
+    <div {% if report.type %} class="comment_right" {% else %} class="comment_left" {% endif %}>
+      <p>
+        {{ report.content | linebreaksbr }}
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+</div>
+{% endblock %}

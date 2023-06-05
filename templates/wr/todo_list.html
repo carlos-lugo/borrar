@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+TODOリスト一覧
+{% endblock %}
+{% block content %}
+<h1>TODOリスト</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+
+
+{% if todo_list %}
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>タイトル</th>
+    <th>詳細</th>
+    <th>期限日</th>
+    <th>完了</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for todo in todo_list %}
+  <tr>
+    <td width="30%">
+      <a href="/todo/edit/{{ todo.pk }}/">{{ todo.title }}</a>
+    </td>
+    <td width="50%">{{ todo.description|default:"" | truncatechars:30 }}</td>
+    <td>
+      <span {% if not todo.is_done and today> todo.expiration_date %}style="color:red;"{% endif %}>
+        {{ todo.expiration_date|date:"Y/m/d" | default:"なし" }}
+      </span>
+    </td>
+    <td>
+      <span {% if not todo.is_done %}style="color:red;" {% endif %}>
+        {{ todo.is_done|yesno:'済,未' }}
+      </span>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+TODOリストがありません。
+{% endif %}
+
+<a class="btn btn-primary" href="/todo/edit/">追加</a>
+{% endblock %}

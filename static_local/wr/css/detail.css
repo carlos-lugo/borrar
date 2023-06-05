@@ -1,0 +1,125 @@
+body {
+  height: 100vh;
+}
+
+footer.fixed-bottom {
+  top: 100vh;
+  width: 100%;
+  position: sticky;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.disp_none {
+  display: none;
+}
+
+.disp_right {
+  padding-right: 18px;
+  text-align: right;
+}
+
+.disp_left {
+  padding-left: 18px;
+  text-align: left;
+}
+
+.disp_center {
+  text-align: center;
+}
+
+.body {
+  width: 500px;
+  margin-left: calc(50% - 250px);
+  margin-right: calc(500% - 250px);
+  background: #7494c0;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.head {
+  background: #273246;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.w100 {
+  width:100%
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.comment_right {
+  position: relative;
+  display: inline-block;
+  margin: 0.5em 43px 0.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 80%;
+  color: #555;
+  font-size: 16px;
+  background: #8de055;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.comment_right ::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: calc(50% - 18px);
+  /* 100% -  border-right */
+  left: calc(100% - 9px);
+  /* 100% -  border-right / 2 */
+  border: 8px solid transparent;
+  border-right: 18px solid #8de055;
+  -webkit-transform: rotate(145deg);
+  transform: rotate(145deg);
+}
+
+.comment_right p {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+}
+
+.comment_left {
+  position: relative;
+  display: inline-block;
+  margin: 0.5em 0 0.5em 15px;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 80%;
+  color: #555;
+  font-size: 16px;
+  background: #edf1ee;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.comment_left ::after {
+  word-wrap: break-word;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: calc(50% - 18px);
+  /* 100% -  border-right */
+  left: -18px;
+  /*-  border-right */
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.comment_left p {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+}

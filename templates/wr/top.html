@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+週報システム
+{% endblock %}
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<div>
+  <a href="/wr/search">週報検索</a>
+</div>
+<div>
+  <a href="/wr/portfolio">ポートフォリオ</a>
+</div>
+{% if report %}
+<div>
+  <a href="/wr/report">週報報告</a>
+</div>
+{% endif %}
+{% if reply %}
+<div>
+  <a href="/wr/reply">週報返信</a>
+</div>
+{% endif %}
+{% endblock %}

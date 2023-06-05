@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+週報システム
+{% endblock %}
+{% block content %}
+<h1>週報システム</h1>
+<p>今日は{{ today|date:"Y/m/d" }}です。</p>
+<p>週報:{{ report_from|date:"Y/m/d" }}～{{ report_end|date:"Y/m/d" }}</p>
+<a href="/wr/{{ back }}"> 一覧に戻る</a>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th colspan="2">週報</th>
+  </tr>
+  <tbody>
+  {% for index in indexes %}
+  <tr>
+    <td colspan="2">
+      <span>
+        {{ index.report_date }}
+      </span>
+    </td>
+  </tr>
+  {% for report in index.reports %}
+  <tr>
+    {% if report.type %}
+    <td></td>
+    {% endif %}
+    <td>
+      {% if report.type %}
+      {{ report.type.name }}:<br/>
+      {% else %}
+      {{ report.created_user.name }}:<br/>
+      {% endif %}
+      <span>
+        {{ report.content }}<br/>
+      </span>
+    </td>
+    {% if not report.type %}
+    <td></td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
